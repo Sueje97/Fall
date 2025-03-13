@@ -84,16 +84,9 @@ if st.button("Predict"):
         features=features.iloc[0],
         matplotlib=False
     )
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+    plt.savefig("shap_force_plot.png", dpi=1200)
     st.image("shap_force_plot.png")
-    
-    html_output = shap.force_plot(
-        base_value=explainer.expected_value,
-        shap_values=shap_values,
-        features=features.iloc[0],
-        show=False
-    )
-    shap.save_html("shap_force_plot.html", html_output)
+
 
 
 
