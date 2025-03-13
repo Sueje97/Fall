@@ -78,8 +78,5 @@ if st.button("Predict"):
 
     # 绘制 SHAP 瀑布图
     shap.plots.waterfall(shap_values[0], show=False)
-    plt.savefig("shap_waterfall_plot.png", bbox_inches='tight', dpi=300)
+    plt.savefig("shap_waterfall_plot.png", bbox_inches='tight', dpi=400)
     st.image("shap_waterfall_plot.png")
-
-
-   
