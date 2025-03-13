@@ -70,12 +70,12 @@ if st.button("Predict"):
     ## Load the model
     model = joblib.load("Total_model.pkl")
     
-    explainer = shap.Explainer(model, features)
-    shap_values = explainer(features)
+    explainer = shap.Explainer(model, features_array)
+    shap_values = explainer(features_array)
     
     # 绘制 force plot
     fig, ax = plt.subplots(figsize=(20, 5))  # 调整图形大小
-    shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), matplotlib=True, show=False, figsize=(20, 5))
+    shap.force_plot(shap_values[0], pd.DataFrame([features_array.iloc[0]], columns=features_array.columns), matplotlib=True, show=False, figsize=(20, 5))
 
     fig = plt.gcf()
 
