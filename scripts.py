@@ -72,10 +72,10 @@ if st.button("Predict"):
     # Calculate SHAP values and display force plot 
     ## Load the model
     model = joblib.load("Total_model.pkl")
-    
-    explainer = shap.Explainer(model, features)
+    features = pd.DataFrame([feature_values], columns=feature_names)
+
+    explainer = shap.Explainer(model)
     shap_values = explainer(features)
 
-    shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), matplotlib=True,show=False)
-    plt.savefig("shap_force_plot.png",dpi=1200)
-    st.image("shap_force_plot.png")
+    shap.plots_waterfall(shap_values[0])
+    st.pyplot(bbox_inches='tight')
