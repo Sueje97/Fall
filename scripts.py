@@ -74,7 +74,7 @@ if st.button("Predict"):
     model = joblib.load("Total_model.pkl")
     features = pd.DataFrame([feature_values], columns=feature_names)
 
-    explainer = shap.Explainer(model)
+    explainer = shap.Explainer(model,feature_names)
     shap_values = explainer(features)
 
     shap.plots_waterfall(shap_values[0])
