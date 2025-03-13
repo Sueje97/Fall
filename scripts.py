@@ -48,15 +48,22 @@ feature_values = [Age,Sex, Fall_history, Difficulty_in_bending, Difficulty_getti
                  Pain_Severe, Health_Poor, Sleep, Depression]
 features = np.array([feature_values])
 
+# Scale the features
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+columns_to_scale = ['Depression', 'Sleep', 'Age']
+features[columns_to_scale] = scaler.transform(features[columns_to_scale])
+features = features.round({'Age': 3, 'Sleep':3, 'Depression':3})
+
 if st.button("Predict"):    
     
     # Predict class and probabilities    
     predicted_class = model.predict(features)[0]    
-    predicted_proba = model.predict_proba(features)[0]
-    
+    predicted_proba = model.predict_proba(features.iloc[0].values.reshape(1, -1))[0][1]
+
     # Display prediction results     
     st.write(f"**Predicted Class:** {predicted_class}")    
-    st.write(f"**Prediction Probabilities:** {predicted_proba}")
+    st.write(f"**Prediction Probabilities:** {predicted_proba:.1f}")
 
     # Generate advice based on prediction results   
     probability = predicted_proba[predicted_class] * 100
