@@ -75,12 +75,23 @@ if st.button("Predict"):
     def predict_proba(X):
         return model.predict_proba(X)
     
+# 使用 LinearExplainer 适用于逻辑回归
     explainer = shap.LinearExplainer(model, features)
+
+# 计算 SHAP 值
     shap_values = explainer.shap_values(features)
-    shap.force_plot(base_value=explainer.expected_value[1],  shap_values=shap_values[1], features=features.iloc[0], matplotlib=True)
-    
+
+# 显示 SHAP Force Plot
+    shap.force_plot(
+        base_value=explainer.expected_value,  # 使用标量值
+        shap_values=shap_values[1],  # 正类的 SHAP 值
+        features=features.iloc[0],  # 输入数据
+        matplotlib=True)
+
+# 保存为静态图像
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
     st.image("shap_force_plot.png")
+
 
 
    
