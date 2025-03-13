@@ -15,7 +15,6 @@ feature_names = ["Age", "Sex", "Fall_history", "Difficulty_in_bending", "Difficu
 st.title("Falls Risk Prediction Among Community-Dwelling Older Adults")
 
 ## Defining variables
-
 # Age: numerical input
 Age = st.number_input("Age:", min_value=60.0, max_value=120.0, value=60.0, step=0.1)
 
