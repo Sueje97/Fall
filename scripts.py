@@ -73,7 +73,7 @@ if st.button("Predict"):
     ## Load the model
     model = joblib.load("Total_model.pkl")
     
-    explainer = shap.Explainer(model.predict_proba, features)
+    explainer = shap.Explainer(model, features)
     shap_values = explainer(features)
 
     # 绘制 SHAP 瀑布图
