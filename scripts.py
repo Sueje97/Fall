@@ -81,7 +81,7 @@ if st.button("Predict"):
         shap_values=shap_values,  # 正类的 SHAP 值
         features=features.iloc[0],  # 输入数据
         matplotlib=True)
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+    plt.savefig("shap_force_plot.png", bbox_inches='tight')
     st.image("shap_force_plot.png")
 
 
