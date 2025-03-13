@@ -76,8 +76,8 @@ if st.button("Predict"):
     explainer = shap.Explainer(model, features)
     shap_values = explainer(features)
 
-    plt.figure(figsize=(20, 3))  # 增加图像宽度
+    plt.figure(figsize=(50, 5))  # 增加图像宽度
 
     shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), matplotlib=True, show=False)
-    plt.savefig("shap_force_plot.png", dpi=300, bbox_inches='tight')  
+    plt.savefig("shap_force_plot.png", dpi=500, bbox_inches='tight')  
     st.image("shap_force_plot.png")
