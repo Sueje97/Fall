@@ -76,12 +76,7 @@ if st.button("Predict"):
     explainer = shap.LinearExplainer(model, features)
     shap_values = explainer.shap_values(features)
 
-    shap.force_plot(
-        base_value=explainer.expected_value,
-        shap_values=shap_values, 
-        features=features.iloc[0],
-        figsize=(20, 3),
-        matplotlib=True)
+    shap.plots.waterfall(shap_values[0],show=False)
     
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=500)
     st.image("shap_force_plot.png")
