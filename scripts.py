@@ -77,6 +77,7 @@ if st.button("Predict"):
     shap_values = explainer(features)
 
     # 绘制 SHAP 瀑布图
-    shap.plots.waterfall(shap_values[0], show=False)
-    plt.savefig("total_waterfall_plot.png", bbox_inches="tight", dpi=300)
-    st.image("total_waterfall_plot.png")
+    shap.force_plot(shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)    
+    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+    
+    st.image("shap_force_plot.png")
