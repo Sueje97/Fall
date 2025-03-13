@@ -54,9 +54,7 @@ scaler = StandardScaler()
 features[columns_to_scale] = scaler.fit_transform(features[columns_to_scale])
 features = features.round(3)
 
-
 if st.button("Predict"):    
-    
     # Predict class and probabilities    
     features_array = features.values
 
@@ -75,9 +73,14 @@ if st.button("Predict"):
     
     explainer = shap.Explainer(model, features)
     shap_values = explainer(features)
+    
+    # 绘制 force plot
+    fig, ax = plt.subplots(figsize=(20, 5))  # 调整图形大小
+    shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), matplotlib=True, show=False, figsize=(20, 5))
 
-    plt.figure(figsize=(50, 5))  # 增加图像宽度
+    fig = plt.gcf()
 
-    shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), matplotlib=True, show=False)
-    plt.savefig("shap_force_plot.png", dpi=1500, bbox_inches='tight')  
+    plt.savefig("shap_force_plot.png", dpi=300, bbox_inches='tight')
+
+    # 在 Streamlit 中显示图形
     st.image("shap_force_plot.png")
