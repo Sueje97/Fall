@@ -79,7 +79,7 @@ if st.button("Predict"):
     shap_values = explainer.shap_values(features)
     shap.force_plot(base_value=explainer.expected_value,  # 使用标量值
         shap_values=shap_values,  # 正类的 SHAP 值
-        features=features.iloc[0],show=False)
+        features=features.iloc[0],matplotlib=True,show=False)
     plt.savefig("shap_force_plot.pdf", bbox_inches='tight')
     st.image("shap_force_plot.pdf")
 
