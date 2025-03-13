@@ -66,7 +66,7 @@ if st.button("Predict"):
 
     # Display prediction results     
     st.write(f"**Predicted Class:** {predicted_class}")    
-    st.write(f"**Prediction Probabilities:** {predicted_proba:.1f}")
+    st.write(f"**Prediction Probabilities:** {predicted_proba:.2f}")
 
     
     # Calculate SHAP values and display force plot 
@@ -80,6 +80,7 @@ if st.button("Predict"):
         base_value=explainer.expected_value,
         shap_values=shap_values, 
         features=features.iloc[0],
+        figsize=(20, 3),
         matplotlib=True)
     
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1000)
