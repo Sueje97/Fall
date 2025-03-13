@@ -78,4 +78,4 @@ if st.button("Predict"):
 
     shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), matplotlib=True)
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
-    st.image("shap_force_plot.html")
+    st.image("shap_force_plot.png")
