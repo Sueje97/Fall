@@ -56,7 +56,7 @@ if st.button("Predict"):
     
     # Display prediction results     
     st.write(f"**Predicted Class:** {predicted_class}")    
-    st.write(f"**Prediction Probabilities:** {predicted_proba:.1f}")
+    st.write(f"**Prediction Probabilities:** {predicted_proba}")
 
     # Generate advice based on prediction results   
     probability = predicted_proba[predicted_class] * 100
