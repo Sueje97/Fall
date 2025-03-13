@@ -57,7 +57,7 @@ if st.button("Predict"):
     # Display prediction results   
     if predicted_class == 1:
         st.write(f"**Predicted Class:** {predicted_class}")
-        st.write(f"**Prediction Probabilities:** {predicted_proba}")
+        st.write(f"**Prediction Probabilities:** {predicted_proba:.1f}")
     else:
         st.write("**Predicted Class is not 1.**") 
 
@@ -86,8 +86,7 @@ if st.button("Predict"):
     shap_values = explainer(pd.DataFrame([feature_values], columns=feature_names))
 
 # Display SHAP force plot
-    shap.force_plot(
-        explainer.expected_value,shap_values[0],pd.DataFrame([feature_values], columns=feature_names),matplotlib=True)
+    shap.force_plot(shap_values[0])
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
     st.image("shap_force_plot.png")
 
