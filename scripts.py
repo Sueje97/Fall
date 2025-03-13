@@ -54,12 +54,9 @@ if st.button("Predict"):
     predicted_class = model.predict(features)[0]    
     predicted_proba = model.predict_proba(features)[0]
     
-    # Display prediction results   
-    if predicted_class == 1:
-        st.write(f"**Predicted Class:** {predicted_class}")
-        st.write(f"**Prediction Probabilities:** {predicted_proba:.1f}")
-    else:
-        st.write("**Predicted Class is not 1.**") 
+    # Display prediction results     
+    st.write(f"**Predicted Class:** {predicted_class}")    
+    st.write(f"**Prediction Probabilities:** {predicted_proba:.1f}")
 
     # Generate advice based on prediction results   
     probability = predicted_proba[predicted_class] * 100
