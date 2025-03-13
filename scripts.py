@@ -46,14 +46,14 @@ Depression = st.number_input("Depression:", min_value=0, max_value=30, value=0)
 # Process inputs and make predictions
 feature_values = [Age,Sex, Fall_history, Difficulty_in_bending, Difficulty_getting_up_after_prolonged_sitting,
                  Pain_Severe, Health_Poor, Sleep, Depression]
-features = np.array([feature_values])
+features = pd.DataFrame([feature_values], columns=feature_names)  
 
-# Scale the features
 from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
 columns_to_scale = ['Depression', 'Sleep', 'Age']
-features[columns_to_scale] = scaler.transform(features[columns_to_scale])
-features = features.round({'Age': 3, 'Sleep':3, 'Depression':3})
+scaler = StandardScaler()
+features[columns_to_scale] = scaler.fit_transform(features[columns_to_scale])
+features = features.round(3)
+
 
 if st.button("Predict"):    
     
