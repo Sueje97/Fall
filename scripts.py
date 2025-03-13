@@ -17,7 +17,7 @@ st.title("Falls Risk Prediction Among Community-Dwelling Older Adults")
 ## Defining variables
 
 # Age: numerical input
-Age = st.number_input("Age:", min_value=60, max_value=120, value=60, step=1)
+Age = st.number_input("Age:", min_value=60, max_value=120, value=60, step=0.1)
 
 # Sex: categorical selection
 Sex = st.selectbox("Sex (0=Female, 1=Male):", options=[0, 1], format_func=lambda x: 'Female (0)' if x == 0 else 'Male (1)')
@@ -41,7 +41,7 @@ Health_Poor = st.selectbox("Self-reported general health(Pool):", options=[0, 1]
 Sleep = st.number_input("Sleep duration(h):", min_value=0, max_value=24, value=6, step=0.1)
 
 # Depression: numerical input
-Depression = st.number_input("Depression:", min_value=0, max_value=30, value=0, step=1)
+Depression = st.number_input("Depression:", min_value=0, max_value=30, value=0, step=0.1)
 
 # Process inputs and make predictions
 feature_values = [Age,Sex, Fall_history, Difficulty_in_bending, Difficulty_getting_up_after_prolonged_sitting,
