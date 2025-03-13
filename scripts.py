@@ -75,7 +75,7 @@ if st.button("Predict"):
     
     # 绘制 force plot
     fig, ax = plt.subplots(figsize=(20, 5))  # 调整图形大小
-    shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features_array.columns), matplotlib=True, show=False, figsize=(20, 5))
+    shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), matplotlib=True, show=False, figsize=(20, 5))
 
     fig = plt.gcf()
 
