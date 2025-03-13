@@ -73,15 +73,13 @@ if st.button("Predict"):
     ## Load the model
     model = joblib.load("Total_model.pkl")
     
-    explainer = shap.LinearExplainer(model, features)
-    shap_values = explainer.shap_values(features)
+    explainer = shap.Explainer(model.predict_proba, features)
+    shap_values = explainer(features)
 
-    shap.plots.waterfall(shap_values[0],show=False)
-    
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=500)
-    st.image("shap_force_plot.png")
-
-
+    # 绘制 SHAP 瀑布图
+    shap.plots.waterfall(shap_values[0], show=False)
+    plt.savefig("shap_waterfall_plot.png", bbox_inches='tight', dpi=300)
+    st.image("shap_waterfall_plot.png")
 
 
    
