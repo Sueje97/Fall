@@ -58,8 +58,11 @@ features = features.round(3)
 if st.button("Predict"):    
     
     # Predict class and probabilities    
-    predicted_class = model.predict(features)[0]    
-    predicted_proba = model.predict_proba(features.iloc[0].values.reshape(1, -1))[0][1]
+    features_array = features.values
+
+# 预测类别和概率
+    predicted_class = model.predict(features_array)[0]
+    predicted_proba = model.predict_proba(features_array)[0][1]  # 假设是二分类问题
 
     # Display prediction results     
     st.write(f"**Predicted Class:** {predicted_class}")    
@@ -86,12 +89,12 @@ if st.button("Predict"):
     def predict_proba(X):
         return model.predict_proba(X)
     
-    explainer = shap.Explainer(predict_proba, masker=shap.maskers.Independent(features))  # Use the prediction function
-    shap_values = explainer(pd.DataFrame([feature_values], columns=feature_names))
-
-# Display SHAP force plot
-    shap.force_plot(shap_values[0])
+    explainer = shap.LinearExplainer(model, features)
+    shap_values = explainer.shap_values(features)
+    shap.force_plot(base_value=explainer.expected_value[1],  shap_values=shap_values[1], features=features.iloc[0], matplotlib=True)
+    
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
     st.image("shap_force_plot.png")
 
 
+   
