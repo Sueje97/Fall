@@ -72,19 +72,17 @@ if st.button("Predict"):
     # Calculate SHAP values and display force plot 
     ## Load the model
     model = joblib.load("Total_model.pkl")
-    def predict_proba(X):
-        return model.predict_proba(X)
     
     explainer = shap.LinearExplainer(model, features)
     shap_values = explainer.shap_values(features)
 
     shap.force_plot(
         base_value=explainer.expected_value,
-        shap_values=shap_values,  # 使用整个 SHAP 值数组
+        shap_values=shap_values, 
         features=features.iloc[0],
-        matplotlib=False
-    )
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=800)
+        matplotlib=True)
+    
+    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1000)
     st.image("shap_force_plot.png")
 
 
