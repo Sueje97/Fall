@@ -71,6 +71,7 @@ if st.button("Predict"):
     
     # Calculate SHAP values and display force plot 
     ## Load the model
+    shap.initjs()
     model = joblib.load("Total_model.pkl")
     
     explainer = shap.Explainer(model, features)
