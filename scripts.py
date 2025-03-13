@@ -2,7 +2,6 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
-import shap
 import matplotlib.pyplot as plt
 
 model = joblib.load("Total_model.pkl")
@@ -33,8 +32,8 @@ Difficulty_getting_up_after_prolonged_sitting = st.selectbox("Difficulty getting
 # Pain_Severe: categorical selection
 Pain_Severe = st.selectbox("Pain(Severe):", options=[0, 1], format_func=lambda x: 'No (0)' if x == 0 else 'Yes (1)')
 
-# Difficulty in bending: categorical selection
-Health_Poor = st.selectbox("Self-reported general health(Pool):", options=[0, 1], format_func=lambda x: 'No (0)' if x == 0 else 'Yes (1)')
+# Health_Poor: categorical selection
+Health_Poor = st.selectbox("Self-reported general health(Poor):", options=[0, 1], format_func=lambda x: 'No (0)' if x == 0 else 'Yes (1)')
 
 # Sleep duration(h): numerical input
 Sleep = st.number_input("Sleep duration(h):", min_value=0.0, max_value=24.0, value=6.0, step=0.1)
@@ -64,22 +63,3 @@ if st.button("Predict"):
     # Display prediction results     
     st.write(f"**Predicted Class:** {predicted_class}")    
     st.write(f"**Prediction Probabilities:** {predicted_proba:.2f}")
-
-    
-    # Calculate SHAP values and display force plot 
-    ## Load the model
-    model = joblib.load("Total_model.pkl")
-    
-    explainer = shap.Explainer(model, features_array)
-    shap_values = explainer(features_array)
-    
-    # 绘制 force plot
-    fig, ax = plt.subplots(figsize=(20, 5))  # 调整图形大小
-    shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), matplotlib=True, show=False, figsize=(20, 5))
-
-    fig = plt.gcf()
-
-    plt.savefig("shap_force_plot.png", dpi=300, bbox_inches='tight')
-
-    # 在 Streamlit 中显示图形
-    st.image("shap_force_plot.png")
