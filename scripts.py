@@ -5,7 +5,6 @@ import pandas as pd
 import shap
 import matplotlib.pyplot as plt
 
-## Load the model
 model = joblib.load("Total_model.pkl")
 
 ## Define feature names
@@ -55,10 +54,13 @@ if st.button("Predict"):
     predicted_class = model.predict(features)[0]    
     predicted_proba = model.predict_proba(features)[0]
     
-    # Display prediction results    
-    st.write(f"**Predicted Class:** {predicted_class}")    
-    st.write(f"**Prediction Probabilities:** {predicted_proba}")
-    
+    # Display prediction results   
+    if predicted_class == 1:
+        st.write(f"**Predicted Class:** {predicted_class}")
+        st.write(f"**Prediction Probabilities:** {predicted_proba}")
+    else:
+        st.write("**Predicted Class is not 1.**") 
+
     # Generate advice based on prediction results   
     probability = predicted_proba[predicted_class] * 100
     
@@ -75,9 +77,18 @@ if st.button("Predict"):
     st.write(advice)
     
     # Calculate SHAP values and display force plot 
-    explainer = shap.Explainer(model)  
-    shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
+    ## Load the model
+    model = joblib.load("Total_model.pkl")
+    def predict_proba(X):
+        return model.predict_proba(X)
     
-    shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)    
+    explainer = shap.Explainer(predict_proba, masker=shap.maskers.Independent(features))  # Use the prediction function
+    shap_values = explainer(pd.DataFrame([feature_values], columns=feature_names))
+
+# Display SHAP force plot
+    shap.force_plot(
+        explainer.expected_value,shap_values[0],pd.DataFrame([feature_values], columns=feature_names),matplotlib=True)
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
     st.image("shap_force_plot.png")
+
+
