@@ -77,11 +77,21 @@ if st.button("Predict"):
     
     explainer = shap.LinearExplainer(model, features)
     shap_values = explainer.shap_values(features)
-    shap.force_plot(base_value=explainer.expected_value,  # 使用标量值
-        shap_values=shap_values,  # 正类的 SHAP 值
-        features=features.iloc[0],matplotlib=True,show=False)
-    plt.savefig("shap_force_plot.pdf", bbox_inches='tight')
-    st.image("shap_force_plot.pdf")
+
+    shap.force_plot(
+        base_value=explainer.expected_value,
+        shap_values=shap_values,  # 使用整个 SHAP 值数组
+        features=features.iloc[0],
+        matplotlib=False
+    )
+
+    html_output = shap.force_plot(
+        base_value=explainer.expected_value,
+        shap_values=shap_values,
+        features=features.iloc[0],
+        show=False
+    )
+    shap.save_html("shap_force_plot.html", html_output)
 
 
 
