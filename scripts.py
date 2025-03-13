@@ -68,20 +68,6 @@ if st.button("Predict"):
     st.write(f"**Predicted Class:** {predicted_class}")    
     st.write(f"**Prediction Probabilities:** {predicted_proba:.1f}")
 
-    # Generate advice based on prediction results   
-    probability = predicted_proba[predicted_class] * 100
-    
-    if predicted_class == 1:        
-         advice = (f"According to our model, you have a high risk of falling. "
-                   f"The model predicts that your probability of having risk of falling is {probability:.1f}%. "            
-                   "While this is just an estimate, it suggests that you may be at significant risk. "    
-                 )    
-    else:
-         advice = ( f"According to our model, you have a low risk of falling. "
-                   f"The model predicts that your probability of not having falling is {probability:.1f}%. "       
-                  )
-
-    st.write(advice)
     
     # Calculate SHAP values and display force plot 
     ## Load the model
