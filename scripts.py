@@ -77,5 +77,6 @@ if st.button("Predict"):
     shap_values = explainer(features)
 
     # 绘制 SHAP 瀑布图 
-    shap.save_html("shap_force_plot.html", shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), show=False))
+    html_output = shap.force_plot(shap_values[0], pd.DataFrame([features.iloc[0]], columns=features.columns), show=False)
+    shap.save_html("shap_force_plot.html", html_output)
     st.image("shap_force_plot.html")
