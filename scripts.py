@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 model = joblib.load("Total_model.pkl")
 
 ## Define feature names
-feature_names = ["Age", "Sex", "Fall_history_Yes", "Difficulty_in_bending_Yes", "Difficulty_getting_up_after_prolonged_sitting_Yes",
+feature_names = ["Age", "Male","Fall_history_Yes", "Difficulty_in_bending_Yes",
+                  "Difficulty_rising_after_sitting_Yes", 
                  "Pain_Severe", "Health_Poor", "Sleep", "Depression"]
 
 # Streamlit user interface
@@ -18,7 +19,7 @@ st.title("Falls Risk Prediction Among Community-Dwelling Older Adults")
 Age = st.number_input("Age:", min_value=60.0, max_value=120.0, value=60.0, step=0.1)
 
 # Sex: categorical selection
-Sex = st.selectbox("Sex (0=Female, 1=Male):", options=[0, 1], format_func=lambda x: 'Female (0)' if x == 0 else 'Male (1)')
+Male = st.selectbox("Sex (0=Female, 1=Male):", options=[0, 1], format_func=lambda x: 'Female (0)' if x == 0 else 'Male (1)')
 
 # Fall history: categorical selection
 Fall_history_Yes = st.selectbox("Fall history:", options=[0, 1], format_func=lambda x: 'No (0)' if x == 0 else 'Yes (1)')
@@ -27,7 +28,7 @@ Fall_history_Yes = st.selectbox("Fall history:", options=[0, 1], format_func=lam
 Difficulty_in_bending_Yes = st.selectbox("Difficulty in bending:", options=[0, 1], format_func=lambda x: 'No (0)' if x == 0 else 'Yes (1)')
 
 # Difficulty getting up after prolonged sitting: categorical selection
-Difficulty_getting_up_after_prolonged_sitting_Yes = st.selectbox("Difficulty getting up after prolonged sitting:", options=[0, 1], format_func=lambda x: 'No (0)' if x == 0 else 'Yes (1)')
+Difficulty_rising_after_sitting_Yes = st.selectbox("Difficulty getting up after prolonged sitting:", options=[0, 1], format_func=lambda x: 'No (0)' if x == 0 else 'Yes (1)')
 
 # Pain_Severe: categorical selection
 Pain_Severe = st.selectbox("Pain(Severe):", options=[0, 1], format_func=lambda x: 'No (0)' if x == 0 else 'Yes (1)')
@@ -42,8 +43,8 @@ Sleep = st.number_input("Sleep duration(h):", min_value=0.0, max_value=24.0, val
 Depression = st.number_input("Depression:", min_value=0.0, max_value=30.0, value=0.0, step=1.0)
 
 # Process inputs and make predictions
-feature_values = [Age,Sex, Fall_history_Yes, Difficulty_in_bending_Yes,
-                   Difficulty_getting_up_after_prolonged_sitting_Yes,
+feature_values = [Age, Male , Fall_history_Yes, Difficulty_in_bending_Yes,
+                   Difficulty_rising_after_sitting_Yes,
                  Pain_Severe, Health_Poor, Sleep, Depression]
 features = pd.DataFrame([feature_values], columns=feature_names)  
 
