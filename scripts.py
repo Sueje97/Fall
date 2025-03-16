@@ -68,7 +68,7 @@ if st.button("Predict"):
     import shap
     explainer = shap.Explainer(model.predict_proba, features)
     shap_values = explainer(features)
-    shap.plots.waterfall(shap_values[0], show=False)
+    shap.plots.waterfall(shap_values[0,0], show=False)
 
     plt.savefig("shap_waterfall_plot.png", dpi=1200)
     st.image("shap_waterfall_plot.png",use_column_width=True)
