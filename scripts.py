@@ -7,9 +7,8 @@ import matplotlib.pyplot as plt
 model = joblib.load("Total_model.pkl")
 
 ## Define feature names
-feature_names = ["Age", "Male","Fall_history_Yes", "Difficulty_in_bending_Yes",
-                  "Difficulty_rising_after_sitting_Yes", 
-                 "Pain_Severe", "Health_Poor", "Sleep", "Depression"]
+feature_names = ["Depression", "Fall_history_Yes", "Difficulty_in_bending_Yes", "Male",
+                 "Difficulty_rising_after_sitting_Yes", "Sleep", "Age", "Pain_Severe", "Health_Poor"]
 
 # Streamlit user interface
 st.title("Falls Risk Prediction Among Community-Dwelling Older Adults")
@@ -43,9 +42,8 @@ Sleep = st.number_input("Sleep duration(h):", min_value=0.0, max_value=24.0, val
 Depression = st.number_input("Depression:", min_value=0.0, max_value=30.0, value=0.0, step=1.0)
 
 # Process inputs and make predictions
-feature_values = [Age, Male , Fall_history_Yes, Difficulty_in_bending_Yes,
-                   Difficulty_rising_after_sitting_Yes,
-                 Pain_Severe, Health_Poor, Sleep, Depression]
+feature_values = [Depression,Fall_history_Yes,Difficulty_in_bending_Yes,Male,
+                  Difficulty_rising_after_sitting_Yes,Sleep,Age,Pain_Severe,Health_Poor]
 features = pd.DataFrame([feature_values], columns=feature_names)  
 
 from sklearn.preprocessing import StandardScaler
