@@ -70,7 +70,7 @@ if st.button("Predict"):
     explainer = shap.Explainer(model, X_train, feature_names=feature_names)
     shap_values = explainer(features)
 
-    shap.plots.force(shap_values[0],  show=False, figsize=(20, 5))
+    shap.plots.force(shap_values[0],  show=False, matplotlib=True)
 
     plt.savefig("shap_force_plot.png",bbox_inches='tight' ,dpi=1200)
     st.image("shap_force_plot.png")
