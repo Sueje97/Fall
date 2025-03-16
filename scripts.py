@@ -72,5 +72,6 @@ if st.button("Predict"):
         shap.force_plot(shap_values[0],show=False)
     else:
         shap.force_plot(shap_values[1],show=False)
+    
     plt.savefig("shap_waterfall_plot.png", dpi=1200)
     st.image("shap_waterfall_plot.png",use_column_width=True)
