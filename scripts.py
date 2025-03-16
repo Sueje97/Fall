@@ -72,6 +72,5 @@ if st.button("Predict"):
     expected_value = explainer(features).base_values[0]
 
     shap.plots.waterfall(shap_values[0], show=False)
-
     plt.savefig("shap_waterfall_plot.png", dpi=1200)
     st.image("shap_waterfall_plot.png",use_column_width=True)
