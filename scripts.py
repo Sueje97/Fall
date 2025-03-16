@@ -66,8 +66,8 @@ if st.button("Predict"):
 
     # Calculate SHAP values and display force plot     
     import shap
-    explainer = shap.LinearExplainer(model, features)
-    shap_values = explainer(pd.DataFrame([feature_values], columns=feature_names))
+    explainer = shap.Explainer(model.predict_proba, features)
+    shap_values = explainer(features)
     shap.plots.waterfall(shap_values[0], show=False)
 
     plt.savefig("shap_waterfall_plot.png", dpi=1200)
