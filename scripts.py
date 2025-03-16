@@ -69,8 +69,10 @@ if st.button("Predict"):
     explainer = shap.Explainer(model.predict_proba, features)
     shap_values = explainer(features)
 
-    expected_value = explainer(features).base_values[0]
-    shap.plots.force(explainer.expected_value[0], shap_values[0, :, 1], show=False)
+    expected_value = shap_values.base_values[0]
+    shap_sample = shap_values[0]
+    shap.force_plot(expected_value, shap_sample.values, features.iloc[0, :], matplotlib=True)
+
 
     plt.savefig("shap_force_plot.png", dpi=1200)
     st.image("shap_force_plot.png")
