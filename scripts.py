@@ -66,11 +66,10 @@ if st.button("Predict"):
 
     # Calculate SHAP values and display force plot     
     import shap
-    explainer = shap.Explainer(model.predict_proba, features)
+    explainer = shap.Explainer(model)
     shap_values = explainer(features)
 
-    shap.force_plot(explainer.expected_value[0], shap_values[0], matplotlib=True)
-
+    shap.plots.force(shap_values[0], matplotlib=True, show=False)
 
     plt.savefig("shap_force_plot.png", dpi=1200)
     st.image("shap_force_plot.png")
