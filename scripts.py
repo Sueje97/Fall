@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 model = joblib.load("Total_model.pkl")
+X_train = pd.read_csv("X_train.csv")
 
 ## Define feature names
 feature_names = ["Depression", "Fall_history_Yes", "Difficulty_in_bending_Yes", "Male",
@@ -66,7 +67,7 @@ if st.button("Predict"):
 
     # Calculate SHAP values and display force plot     
     import shap
-    explainer = shap.Explainer(model)
+    explainer = shap.Explainer(model, X_train, feature_names=feature_names)
     shap_values = explainer(features)
 
     shap.plots.force(shap_values[0], matplotlib=True, show=False)
