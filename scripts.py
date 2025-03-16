@@ -70,8 +70,7 @@ if st.button("Predict"):
     shap_values = explainer(features)
 
     expected_value = explainer(features).base_values[0]
+    shap.plots.force(explainer.expected_value, shap_values[0, :, 1], show=False)
 
-    shap.plots.waterfall(shap_values[0, :, 1], show=False)
-
-    plt.savefig("shap_waterfall_plot.png", dpi=1200)
-    st.image("shap_waterfall_plot.png")
+    plt.savefig("shap_force_plot.png", dpi=1200)
+    st.image("shap_force_plot.png")
