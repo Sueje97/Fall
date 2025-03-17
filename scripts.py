@@ -57,9 +57,9 @@ if st.button("Predict"):
     # Predict class and probabilities    
     features_array = features.values
 
-# 预测类别和概率
+# Preriction
     predicted_class = model.predict(features_array)[0]
-    predicted_proba = model.predict_proba(features_array)[0][1]  # 假设是二分类问题
+    predicted_proba = model.predict_proba(features_array)[0][1] 
 
     # Display prediction results     
     st.write(f"**Predicted Class:** {predicted_class}")    
